@@ -20,6 +20,17 @@ const randomDisplayPokemonImage = (): string => {
   return pokemonImages[randomPokemonNumber];
 };
 
+const fetchPokemonApi = async () => {
+  const response = await fetch("https://pokeapi.co/api/v2/pokemon/25");
+  const result = await response.json();
+  return result;
+};
+fetchPokemonApi().then((pokemon) => {
+  console.log(pokemon['id']);
+  console.log(pokemon['name']);
+  console.log(pokemon['sprites']['front_default']);
+})
+
 export default function Home() {
 
   const [pokemonImageUrl, setPokemonImageUrl] = useState(
