@@ -1,3 +1,6 @@
+## About Pokeccha
+This is a web app by using PokeAPI just as a hobby.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
