@@ -1,8 +1,10 @@
-import { Inter } from 'next/font/google'
-import Image from 'next/image';
+import { NextPage } from 'next';
+// import { Inter } from 'next/font/google'
+// import Image from 'next/image';
 import { useEffect, useState } from 'react'
+import styles from "styles/Home.module.css";
 
-const inter = Inter({ subsets: ['latin'] })
+// const inter = Inter({ subsets: ['latin'] })
 
 interface Pokemon {
   id: number;
@@ -12,12 +14,12 @@ interface Pokemon {
   height: number;
   weight: number;
 }
-const PokemonList = () => {
+const PokemonList: NextPage = () => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
 
   useEffect(() => {
     const fetchPokemon = async () => { // asyncを書いて非同期（async）関数であることを宣言
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=10");
+      const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=10"); // PokeAPI取得
       const data = await response.json();
 
       const results = await Promise.all(
@@ -46,16 +48,18 @@ const PokemonList = () => {
   }, []);
 
   return (
-    <div>
-      <h1 className="text-center text-3xl">pokeccha</h1>
-      {pokemonList.map((pokemon) => (
-        <div key={pokemon.id}>
+    <div className={styles.container}>
+      <h1 className="text-center text-4xl">pokeccha</h1>
+      <ul>
+        {pokemonList.map((pokemon) => (
+        <li key={pokemon.id}>
           <p>No. {pokemon.id}</p>
           <p>{pokemon.name}</p>
           <img src={pokemon.image} alt={`${pokemon.name} Image`} />
           {/* <Image src={pokemon.image} alt={`${pokemon.name} Image`} width={100} height={100} /> */}
-        </div>
+        </li>
       ))}
+      </ul>
     </div>
   );
 };
