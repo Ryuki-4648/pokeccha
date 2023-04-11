@@ -1,8 +1,5 @@
 import { NextPage } from 'next';
-// import { Inter } from 'next/font/google'
-// import Image from 'next/image';
 import { useEffect, useState } from 'react'
-import styles from "styles/Home.module.css";
 
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -48,7 +45,7 @@ const PokemonList: NextPage = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div>
       <h1 className="text-center text-4xl">pokeccha</h1>
       <ul>
         {pokemonList.map((pokemon) => (
