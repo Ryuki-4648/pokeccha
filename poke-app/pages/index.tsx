@@ -6,7 +6,7 @@ interface Pokemon {
   name: string;
   image : string;
   types01: string;
-  //types02: string;
+  types02: string;
   height: number;
   weight: number;
 }
@@ -24,14 +24,13 @@ const PokemonList: NextPage = () => {
           const res = await fetch(pokemon.url);
           const pokemonData = await res.json();
 
-          //const pokemonSpecies = await fetch(pokemonData.species.url);
           // console.log(data);
           return { 
             id: pokemonData.id, 
             name: pokemonData.name,
             image: pokemonData.sprites.other['official-artwork'].front_default,
             types01: pokemonData.types[0].type.name,
-            //types02: pokemonData.types[1].type.name,
+            types02: pokemonData.types[1] ? `, ${pokemonData.types[1].type.name}` : "",
             height: pokemonData.height,
             weight: pokemonData.weight,
           };
@@ -59,31 +58,31 @@ const PokemonList: NextPage = () => {
           </div>
           <div className="tracking-wider">
             <p className="mb-1">The RESTful Pokémon API</p>
-            <p>https://pokeapi.co/</p>
+            <a href="https://pokeapi.co/" target="_blank" className="underline">https://pokeapi.co/</a>
           </div>
           
         </div>
       </div>
       <div className="px-10 pt-24 flex justify-between">
         <div className="fixed w-1/12">
-          <p className="text-xl uppercase tracking-wider">types</p>
-          <ul>
-            <li>grass</li>
-            <li>fire</li>
-            <li>water</li>
-            <li>bug</li>
-            <li>normal</li>
+          <p className="text-xl uppercase tracking-wider mb-4 border-b border-black inline-flex">types</p>
+          <ul className="uppercase">
+            <li className="mb-2">grass</li>
+            <li className="mb-2">fire</li>
+            <li className="mb-2">water</li>
+            <li className="mb-2">bug</li>
+            <li className="mb-2">normal</li>
           </ul>
-          <p>etc</p>
+          <p className="text-sm">etc</p>
         </div>
         <ul className="flex flex-wrap justify-between w-11/12 ml-auto">
           {pokemonList.map((pokemon) => (
           <li key={pokemon.id} className="mb-24 my-auto px-16 w-1/4">
             <img src={pokemon.image} alt={`${pokemon.name} Image`} />
             {/* <Image src={pokemon.image} alt={`${pokemon.name} Image`} width={100} height={100} /> */}
-            <p className="mb-2">Order No. {pokemon.id}</p>
-            <p className="text-2xl uppercase tracking-wider font-bold">{pokemon.name}</p>
-            <p>Type: {pokemon.types01}</p>
+            <p className="mb-1">Order No. {pokemon.id}</p>
+            <p className="text-2xl uppercase tracking-wider font-bold mb-2">{pokemon.name}</p>
+            <p className="tracking-wide">Type: <span className="uppercase">{pokemon.types01}{pokemon.types02}</span></p>
           </li>
           ))}
         </ul>
