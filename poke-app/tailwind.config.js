@@ -13,8 +13,8 @@ module.exports = {
   },
   purge: [ // ビルド生成時の未使用のスタイルを除外し、パフォーマンスを最適化
     // "./src/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    "./src/pages/**/*.{js,ts,jsx,tsx}",
+    "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
   plugins: [
     // `@tailwindcss/aspect-ratio`を有効にする
