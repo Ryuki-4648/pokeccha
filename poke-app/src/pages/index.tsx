@@ -1,3 +1,5 @@
+import Header from '@/components/header';
+import SideNav from '@/components/sidenav';
 import { NextPage } from 'next';
 import { useEffect, useState } from 'react'
 
@@ -23,8 +25,6 @@ const PokemonList: NextPage = () => {
         data.results.map(async (pokemon: { url: string }) => {
           const res = await fetch(pokemon.url);
           const pokemonData = await res.json();
-
-          // console.log(data);
           return { 
             id: pokemonData.id, 
             name: pokemonData.name,
@@ -46,35 +46,10 @@ const PokemonList: NextPage = () => {
 
   return (
     <>
-      <div className="flex justify-between pt-10 pl-10">
-        <div className="flex items-center">
-          <h1 className="text-center text-4xl tracking-wider mr-6">pokeccha</h1>
-          <h2 className="text-center text-1xl tracking-wider leading-loose">Pick your favorite Pokemon!</h2>
-        </div>
-        <div className="flex mr-10 text-sm">
-          <div className="mr-6 tracking-wide">
-            <p className="mb-1">Mon - Fri : 9AM - 11PM</p>
-            <p className="">Sat - Sun : 8AM - 20PM</p>
-          </div>
-          <div className="tracking-wider">
-            <p className="mb-1">The RESTful Pokémon API</p>
-            <a href="https://pokeapi.co/" target="_blank" className="underline">https://pokeapi.co/</a>
-          </div>
-          
-        </div>
-      </div>
+      <Header />
+      
       <div className="px-10 pt-24 flex justify-between">
-        <div className="fixed w-1/12">
-          <p className="text-xl uppercase tracking-wider mb-4 border-b border-black inline-flex">types</p>
-          <ul className="uppercase">
-            <li className="mb-2">grass</li>
-            <li className="mb-2">fire</li>
-            <li className="mb-2">water</li>
-            <li className="mb-2">bug</li>
-            <li className="mb-2">normal</li>
-          </ul>
-          <p className="text-sm">etc</p>
-        </div>
+        <SideNav />
         <ul className="flex flex-wrap justify-between w-11/12 ml-auto">
           {pokemonList.map((pokemon) => (
           <li key={pokemon.id} className="mb-24 my-auto px-16 w-1/4">
