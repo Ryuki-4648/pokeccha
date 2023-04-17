@@ -16,6 +16,14 @@ interface Pokemon {
 const PokemonList: NextPage = () => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
 
+  // 選択されたポケモンの情報
+  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
+
+  // 各ポケモンをクリックした時
+  const pokemonElementClick = (pokemon: Pokemon) => {
+    setSelectedPokemon(pokemon);
+  };
+
   useEffect(() => {
     const fetchPokemon = async () => { // asyncを書いて非同期（async）関数であることを宣言
       const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=30"); // PokeAPI取得
@@ -52,7 +60,7 @@ const PokemonList: NextPage = () => {
         <SideNav />
         <ul className="flex flex-wrap justify-between w-11/12 ml-auto">
           {pokemonList.map((pokemon) => (
-          <li key={pokemon.id} className="mb-24 my-auto px-16 w-1/4">
+          <li key={pokemon.id} className="mb-24 my-auto px-16 w-1/4 cursor-pointer" onClick={() => pokemonElementClick(pokemon)}>
             <img src={pokemon.image} alt={`${pokemon.name} Image`} />
             {/* <Image src={pokemon.image} alt={`${pokemon.name} Image`} width={100} height={100} /> */}
             <p className="mb-1">Order No. {pokemon.id}</p>
@@ -62,6 +70,24 @@ const PokemonList: NextPage = () => {
           ))}
         </ul>
       </div>
+
+      {selectedPokemon && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white h-1/2 flex justify-center items-center">
+            <div className="h-full flex flex-col justify-center items-center">
+              <div className="flex items-center">
+              <img src={selectedPokemon.image} alt={`${selectedPokemon.name} Image`} className="w-2/4 mr-5" />
+              <div className="w-2/4">
+                <p className="text-2xl uppercase tracking-wider font-bold mb-2">{selectedPokemon.name}</p>
+                <p className="tracking-wide">Type: <span className="uppercase">{selectedPokemon.types01}{selectedPokemon.types02}</span></p>
+                <p className="tracking-wide">Height: <span className="uppercase">{selectedPokemon.height}</span></p>
+                <p className="tracking-wide">Weight: <span className="uppercase">{selectedPokemon.weight}</span></p>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
