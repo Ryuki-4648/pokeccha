@@ -1,6 +1,7 @@
 import Header from '@/components/header';
 import SideNav from '@/components/sidenav';
 import { NextPage } from 'next';
+import Head from 'next/head';
 import { useEffect, useState } from 'react'
 
 interface Pokemon {
@@ -14,16 +15,32 @@ interface Pokemon {
 }
 
 const PokemonList: NextPage = () => {
+
+  // ポケモンリストを保持し、リストを更新する
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
 
-  // 選択されたポケモンの情報
+  // 選択されたポケモンの情報を保持
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
+
+  const [showModal, setShowModal] = useState(false);
 
   // 各ポケモンをクリックした時
   const pokemonElementClick = (pokemon: Pokemon) => {
     setSelectedPokemon(pokemon);
+    setShowModal(true);
   };
 
+  const pokemonModalClose = () => {
+    setSelectedPokemon(null);
+    setShowModal(false);
+  }
+
+  /**
+   * useEffectに渡された関数は、レンダーの結果が画面に反映された後に動作する
+   * 関数の実行タイミングをReactのレンダリング後まで遅らせる
+  */
+
+  // ポケモンのリストを取得するための非同期関数を定義
   useEffect(() => {
     const fetchPokemon = async () => { // asyncを書いて非同期（async）関数であることを宣言
       const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=30"); // PokeAPI取得
@@ -46,14 +63,20 @@ const PokemonList: NextPage = () => {
         })
       );
 
+      // ポケモンのリストを更新
       setPokemonList(results);
     };
 
+    // コンポーネントがマウントされた時だけfetchPokemon関数を実行
     fetchPokemon();
   }, []);
 
   return (
     <>
+      <Head>
+        <title>pokeccha</title>
+        <meta property="og:title" content="PokeAPIでポケモンリストをつくろう" />
+      </Head>
       <Header />
       
       <div className="px-10 pt-24 flex justify-between">
@@ -72,7 +95,7 @@ const PokemonList: NextPage = () => {
       </div>
 
       {selectedPokemon && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex justify-center items-center" onClick={pokemonModalClose}>
           <div className="bg-white h-1/2 flex justify-center items-center">
             <div className="h-full flex flex-col justify-center items-center">
               <div className="flex items-center">
