@@ -12,6 +12,7 @@ interface Pokemon {
   types02: string;
   height: number;
   weight: number;
+  //japaneseName: string;
 }
 
 const PokemonList: NextPage = () => {
@@ -47,6 +48,7 @@ const PokemonList: NextPage = () => {
       const data = await response.json();
 
       const results = await Promise.all(
+        
         data.results.map(async (pokemon: { url: string }) => {
           const res = await fetch(pokemon.url);
           const pokemonData = await res.json();
@@ -56,15 +58,34 @@ const PokemonList: NextPage = () => {
             image: pokemonData.sprites.other['official-artwork'].front_default,
             types01: pokemonData.types[0].type.name,
             types02: pokemonData.types[1] ? `, ${pokemonData.types[1].type.name}` : "",
-            height: pokemonData.height,
-            weight: pokemonData.weight,
+            height: pokemonData.height * 10,
+            weight: pokemonData.weight / 10,
           };
           // ドット絵の場合は pokemonData.sprites.front_default
         })
+        
       );
+
+
+      // const response02 = await fetch("https://pokeapi.co/api/v2/pokemon-species?limit=30");
+      // const data02 = await response02.json();
+
+      // const results02 = await Promise.all(
+      //   data02.results.map(async (pokemon: { url: string }) => {
+      //     const res02 = await fetch(pokemon.url);
+      //     const pokemonData02 = await res02.json();
+      //     return {
+      //       japaneseName: pokemonData02.name[0].name,
+      //     };
+      //   })
+      // );
 
       // ポケモンのリストを更新
       setPokemonList(results);
+
+      // ポケモンのリストを更新
+      //setPokemonList(results02);
+      
     };
 
     // コンポーネントがマウントされた時だけfetchPokemon関数を実行
@@ -101,10 +122,23 @@ const PokemonList: NextPage = () => {
               <div className="flex items-center">
               <img src={selectedPokemon.image} alt={`${selectedPokemon.name} Image`} className="w-2/4 mr-5" />
               <div className="w-2/4">
-                <p className="text-2xl uppercase tracking-wider font-bold mb-2">{selectedPokemon.name}</p>
-                <p className="tracking-wide">Type: <span className="uppercase">{selectedPokemon.types01}{selectedPokemon.types02}</span></p>
-                <p className="tracking-wide">Height: <span className="uppercase">{selectedPokemon.height}</span></p>
-                <p className="tracking-wide">Weight: <span className="uppercase">{selectedPokemon.weight}</span></p>
+                <p className="text-3xl uppercase tracking-wider font-bold mb-4">{selectedPokemon.name}</p>
+                <table className="tracking-wide text-left">
+                  <tbody>
+                    <tr>
+                      <th className="mr-4 block">Type</th>
+                      <td>{selectedPokemon.types01}{selectedPokemon.types02}</td>
+                    </tr>
+                    <tr>
+                      <th className="mr-4 block">Height</th>
+                      <td>{selectedPokemon.height}cm</td>
+                    </tr>
+                    <tr>
+                      <th className="mr-4 block">Weight</th>
+                      <td>{selectedPokemon.weight}Kg</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
               </div>
             </div>
