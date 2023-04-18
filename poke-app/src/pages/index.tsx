@@ -116,34 +116,37 @@ const PokemonList: NextPage = () => {
       </div>
 
       {selectedPokemon && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex justify-center items-center" onClick={pokemonModalClose}>
-          <div className="bg-white h-1/2 flex justify-center items-center">
-            <div className="h-full flex flex-col justify-center items-center">
-              <div className="flex items-center">
-              <img src={selectedPokemon.image} alt={`${selectedPokemon.name} Image`} className="w-2/4 mr-5" />
-              <div className="w-2/4">
-                <p className="text-3xl uppercase tracking-wider font-bold mb-4">{selectedPokemon.name}</p>
-                <table className="tracking-wide text-left">
-                  <tbody>
-                    <tr>
-                      <th className="mr-4 block">Type</th>
-                      <td>{selectedPokemon.types01}{selectedPokemon.types02}</td>
-                    </tr>
-                    <tr>
-                      <th className="mr-4 block">Height</th>
-                      <td>{selectedPokemon.height}cm</td>
-                    </tr>
-                    <tr>
-                      <th className="mr-4 block">Weight</th>
-                      <td>{selectedPokemon.weight}Kg</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+        <>
+          <div className="bg-black bg-opacity-70 top-0 left-0 fixed w-full h-full cursor-pointer" onClick={pokemonModalClose}></div>
+          <div className=" flex justify-center items-center">
+            <div className="bg-white h-1/2 flex justify-center items-center absolute z-10 left-2/4 top-2/4 -translate-x-1/2 -translate-y-1/2">
+              <div className="h-full flex flex-col justify-center items-center">
+                <div className="flex items-center">
+                <img src={selectedPokemon.image} alt={`${selectedPokemon.name} Image`} className="w-2/4 mr-5" />
+                <div className="w-2/4">
+                  <p className="text-3xl uppercase tracking-wider font-bold mb-4">{selectedPokemon.name}</p>
+                  <table className="tracking-wide text-left">
+                    <tbody>
+                      <tr>
+                        <th className="mr-4 block">Type</th>
+                        <td>{selectedPokemon.types01}{selectedPokemon.types02}</td>
+                      </tr>
+                      <tr>
+                        <th className="mr-4 block">Height</th>
+                        <td>{selectedPokemon.height}cm</td>
+                      </tr>
+                      <tr>
+                        <th className="mr-4 block">Weight</th>
+                        <td>{selectedPokemon.weight}Kg</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );
