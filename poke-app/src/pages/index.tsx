@@ -44,7 +44,7 @@ const PokemonList: NextPage = () => {
   // ポケモンのリストを取得するための非同期関数を定義
   useEffect(() => {
     const fetchPokemon = async () => { // asyncを書いて非同期（async）関数であることを宣言
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=30"); // PokeAPI取得
+      const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=6"); // PokeAPI取得
       const data = await response.json();
 
       const results = await Promise.all(
@@ -100,11 +100,11 @@ const PokemonList: NextPage = () => {
       </Head>
       <Header />
       
-      <div className="px-10 pt-24 flex justify-between">
+      <div className="px-4 md:px-10 pt-8 md:pt-24 flex justify-between flex-wrap md:flex-nowrap">
         <SideNav />
-        <ul className="flex flex-wrap justify-between w-11/12 ml-auto">
+        <ul className="flex flex-wrap justify-center md:justify-between w-full md:w-10/12 ml-auto">
           {pokemonList.map((pokemon) => (
-          <li key={pokemon.id} className="mb-24 my-auto px-16 w-1/4 cursor-pointer" onClick={() => pokemonElementClick(pokemon)}>
+          <li key={pokemon.id} className="mb-12 md:mb-24 my-auto px-4 md:px-12 sm:w-5/12 md:w-1/3 lg:w-1/4 cursor-pointer" onClick={() => pokemonElementClick(pokemon)}>
             <img src={pokemon.image} alt={`${pokemon.name} Image`} />
             {/* <Image src={pokemon.image} alt={`${pokemon.name} Image`} width={100} height={100} /> */}
             <p className="mb-1">Order No. {pokemon.id}</p>
@@ -120,7 +120,7 @@ const PokemonList: NextPage = () => {
           <div className="bg-black bg-opacity-70 top-0 left-0 fixed w-full h-full cursor-pointer" onClick={pokemonModalClose}></div>
           <div className=" flex justify-center items-center">
             <div className="bg-white h-1/2 flex justify-center items-center absolute z-10 left-2/4 top-2/4 -translate-x-1/2 -translate-y-1/2">
-              <div className="h-full flex flex-col justify-center items-center">
+              <div className="h-full flex flex-col justify-center items-center bg-main-color01">
                 <div className="flex items-center">
                 <img src={selectedPokemon.image} alt={`${selectedPokemon.name} Image`} className="w-2/4 mr-5" />
                 <div className="w-2/4">
