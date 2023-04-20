@@ -35,11 +35,14 @@ const PokemonList: NextPage = () => {
   const pokemonElementClick = (pokemon: Pokemon) => {
     setSelectedPokemon(pokemon);
     setShowModal(true);
+    document.body.classList.toggle('is-modal-toggle');
   };
 
+  // モーダルを閉じる
   const pokemonModalClose = () => {
     setSelectedPokemon(null);
     setShowModal(false);
+    document.body.classList.remove('is-modal-toggle');
   }
 
   /**
@@ -114,13 +117,13 @@ const PokemonList: NextPage = () => {
       
       <div className="px-4 md:px-10 pt-4 sm:pt-8 md:pt-24 flex justify-between flex-wrap md:flex-nowrap">
         <SideNav />
-        <ul className="flex flex-wrap justify-center md:justify-start w-4/5 sm:w-10/12 mx-auto sm:ml-auto mt-8 md:mt-0">
+        <ul className="flex flex-wrap justify-between md:justify-start w-4/5 sm:w-10/12 mx-auto md:ml-auto md:mr-0 mt-8 md:mt-0">
           {pokemonList.map((pokemon) => (
           <li key={pokemon.id} className="mb-12 md:mb-24 px-4 md:px-12 sm:w-5/12 md:w-1/3 lg:w-1/4 cursor-pointer" onClick={() => pokemonElementClick(pokemon)}>
             <img src={pokemon.image} alt={`${pokemon.name} Image`} />
             {/* <Image src={pokemon.image} alt={`${pokemon.name} Image`} width={100} height={100} /> */}
             <p className="mb-1">Order No. {pokemon.id}</p>
-            <p className="text-2xl uppercase tracking-wider font-bold mb-2">{pokemon.name}</p>
+            <h2 className="text-2xl uppercase tracking-wider font-bold mb-2">{pokemon.name}</h2>
             <p className="tracking-wide">Type: <span className="uppercase">{pokemon.types01}{pokemon.types02}</span></p>
           </li>
           ))}
@@ -131,13 +134,13 @@ const PokemonList: NextPage = () => {
         <>
           <div className="bg-black bg-opacity-70 top-0 left-0 fixed w-full h-full cursor-pointer" onClick={pokemonModalClose}></div>
           <div className="flex justify-center items-center">
-            <div className="bg-main-color01 w-4/5 lg:w-1/2 h-5/6 lg:h-3/4 flex justify-center items-center absolute z-10 left-2/4 top-2/4 -translate-x-1/2 -translate-y-1/2">
-              <div className="h-full flex flex-col justify-center items-center p-4">
-                <div className="flex items-center flex-wrap justify-center lg:flex-nowrap">
-                <img src={selectedPokemon.image} alt={`${selectedPokemon.name} Image`} className="w-5/6 sm:w-2/4 mb-2 md:mb-0 mr-0 lg:mr-8" />
+            <div className="bg-main-color01 w-4/5 lg:w-3/4 h-5/6 lg:h-3/4 flex justify-center items-center absolute z-10 left-2/4 top-2/4 -translate-x-1/2 -translate-y-1/2">
+              <div className="h-full w-full flex flex-col justify-center items-center p-6">
+                <div className="flex items-center flex-wrap justify-center md:justify-center md:flex-nowrap w-full">
+                <img src={selectedPokemon.image} alt={`${selectedPokemon.name} Image`} className="w-3/4 sm:w-1/2 md:w-2/5 mb-2 md:mb-0 mr-0 md:mr-10" />
                 <div className="w-full lg:w-2/4">
                   <p className="mb-1 md:mb-2 tracking-wider text-xl">Order Menu</p>
-                  <p className="text-3xl uppercase tracking-wider font-bold mb-3 md:mb-6 text-font-color01">{selectedPokemon.name}</p>
+                  <h3 className="text-4xl md:text-5xl uppercase tracking-wider font-bold mb-6 md:mb-8 text-font-color01">{selectedPokemon.name}</h3>
                   <table className="tracking-wide text-left text-gray-700">
                     <tbody>
                       <tr>
