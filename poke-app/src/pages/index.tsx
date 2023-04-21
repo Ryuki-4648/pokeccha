@@ -35,14 +35,14 @@ const PokemonList: NextPage = () => {
   const pokemonElementClick = (pokemon: Pokemon) => {
     setSelectedPokemon(pokemon);
     setShowModal(true);
-    document.body.classList.toggle('is-modal-toggle');
+    //document.body.classList.add('is-modal-toggle');
   };
 
   // モーダルを閉じる
   const pokemonModalClose = () => {
     setSelectedPokemon(null);
     setShowModal(false);
-    document.body.classList.remove('is-modal-toggle');
+    //document.body.classList.remove('is-modal-toggle');
   }
 
   /**
@@ -132,52 +132,51 @@ const PokemonList: NextPage = () => {
 
       {selectedPokemon && (
         <>
-          <div className="bg-black bg-opacity-70 top-0 left-0 fixed w-full h-full cursor-pointer" onClick={pokemonModalClose}></div>
-          <div className="flex justify-center items-center">
-            <div className="bg-main-color01 w-4/5 lg:w-3/4 h-5/6 lg:h-3/4 flex justify-center items-center absolute z-10 left-2/4 top-2/4 -translate-x-1/2 -translate-y-1/2">
-              <div className="h-full w-full flex flex-col justify-center items-center p-6">
-                <div className="flex items-center flex-wrap justify-center md:justify-center md:flex-nowrap w-full">
+          <div className="modal-overlay bg-black bg-opacity-70 cursor-pointer" onClick={pokemonModalClose}></div>
+            <div className="flex justify-center items-center">
+              <div className="rounded-3xl bg-main-color01 w-11/12 lg:w-3/4 h-5/6 lg:h-3/4 flex flex-col justify-center items-center p-6 fixed z-10 left-2/4 top-2/4 -translate-x-1/2 -translate-y-1/2">
+                <div className="flex items-center flex-wrap justify-center md:justify-between md:flex-nowrap w-full">
                 <img src={selectedPokemon.image} alt={`${selectedPokemon.name} Image`} className="w-3/4 sm:w-1/2 md:w-2/5 mb-2 md:mb-0 mr-0 md:mr-10" />
                 <div className="w-full lg:w-2/4">
-                  <p className="mb-1 md:mb-2 tracking-wider text-xl">Order Menu</p>
-                  <h3 className="text-4xl md:text-5xl uppercase tracking-wider font-bold mb-6 md:mb-8 text-font-color01">{selectedPokemon.name}</h3>
-                  <table className="tracking-wide text-left text-gray-700">
+                  <p className="mb-1 md:mb-4 tracking-wider text-xl text-gray-700">Order Menu</p>
+                  <h3 className="text-4xl md:text-5xl uppercase tracking-wider font-bold mb-6 md:mb-10 text-font-color01">{selectedPokemon.name}</h3>
+                  <table className="tracking-wider text-left text-gray-700">
                     <tbody>
                       <tr>
-                        <th className="mr-4 block">Type</th>
-                        <td className="uppercase">{selectedPokemon.types01}{selectedPokemon.types02}</td>
+                        <th className="mb-2 mr-4 md:mr-8 block text-lg md:text-xl">Type</th>
+                        <td className="uppercase text-md md:text-lg">{selectedPokemon.types01}{selectedPokemon.types02}</td>
                       </tr>
                       <tr>
-                        <th className="mr-4 block">Height</th>
-                        <td>{selectedPokemon.height}cm</td>
+                        <th className="mb-2 mr-4 md:mr-8 block text-lg md:text-xl">Height</th>
+                        <td className="text-md md:text-lg">{selectedPokemon.height}cm</td>
                       </tr>
                       <tr>
-                        <th className="mr-4 block">Weight</th>
-                        <td>{selectedPokemon.weight}Kg</td>
+                        <th className="mb-2 mr-4 md:mr-8 block text-lg md:text-xl">Weight</th>
+                        <td className="text-md md:text-lg">{selectedPokemon.weight}Kg</td>
                       </tr>
                       <tr>
-                        <th className="mr-4 block">HP</th>
-                        <td>{selectedPokemon.hp}</td>
+                        <th className="mb-2 mr-4 md:mr-8 block text-lg md:text-xl">HP</th>
+                        <td className="text-md md:text-lg">{selectedPokemon.hp}</td>
                       </tr>
                       <tr>
-                        <th className="mr-4 block">Offensive Power</th>
-                        <td>{selectedPokemon.offensivePower}</td>
+                        <th className="mb-2 mr-4 md:mr-8 block text-lg md:text-xl">Offensive Power</th>
+                        <td className="text-md md:text-lg">{selectedPokemon.offensivePower}</td>
                       </tr>
                       <tr>
-                        <th className="mr-4 block">Defense Power</th>
-                        <td>{selectedPokemon.defensePower}</td>
+                        <th className="mb-2 mr-4 md:mr-8 block text-lg md:text-xl">Defense Power</th>
+                        <td className="text-md md:text-lg">{selectedPokemon.defensePower}</td>
                       </tr>
                       <tr>
-                        <th className="mr-4 block">Sp.Offensive Power</th>
-                        <td>{selectedPokemon.specialOffensivePower}</td>
+                        <th className="mb-2 mr-4 md:mr-8 block text-lg md:text-xl">Sp.Offensive Power</th>
+                        <td className="text-md md:text-lg">{selectedPokemon.specialOffensivePower}</td>
                       </tr>
                       <tr>
-                        <th className="mr-4 block">Sp.Defense Power</th>
-                        <td>{selectedPokemon.specialDefensePower}</td>
+                        <th className="mb-2 mr-4 md:mr-8 block text-lg md:text-xl">Sp.Defense Power</th>
+                        <td className="text-md md:text-lg">{selectedPokemon.specialDefensePower}</td>
                       </tr>
                       <tr>
-                        <th className="mr-4 block">Speed</th>
-                        <td>{selectedPokemon.speed}</td>
+                        <th className="mr-8 block text-lg md:text-xl">Speed</th>
+                        <td className="text-md md:text-lg">{selectedPokemon.speed}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -185,7 +184,6 @@ const PokemonList: NextPage = () => {
                 </div>
               </div>
             </div>
-          </div>
         </>
       )}
     </>

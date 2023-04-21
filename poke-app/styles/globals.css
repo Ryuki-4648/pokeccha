@@ -94,7 +94,7 @@ body {
   font-family: 'Trebuchet MS','Avenir Next Condensed',sans-serif;
 }
 
-body.is-modal-toggle {
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
