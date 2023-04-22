@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         'main-color01': '#d1dfe3',
         'font-color01': '#94aeb5',
+        'font-color02': '#5a767d',
       },
     },
   },

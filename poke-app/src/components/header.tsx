@@ -13,7 +13,7 @@ export default function Header() {
           </div>
           <div className="tracking-wider">
             <p className="mb-1">The RESTful Pokémon API</p>
-            <a href="https://pokeapi.co/" target="_blank" className="underline text-font-color01">https://pokeapi.co/</a>
+            <a href="https://pokeapi.co/" target="_blank" className="underline text-font-color01 duration-300 hover:text-font-color02">https://pokeapi.co/</a>
           </div>
           
         </div>
