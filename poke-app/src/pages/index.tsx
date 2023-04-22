@@ -1,4 +1,5 @@
 import Header from '@/components/header';
+import Loading from '@/components/loading';
 import SideNav from '@/components/sidenav';
 import { NextPage } from 'next';
 import Head from 'next/head';
@@ -29,20 +30,22 @@ const PokemonList: NextPage = () => {
   // 選択されたポケモンの情報を保持
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
 
+  // モーダルウィンドウの表示
   const [showModal, setShowModal] = useState(false);
+
+  // loading
+  const [loading, setLoading] = useState(true);
 
   // 各ポケモンをクリックした時
   const pokemonElementClick = (pokemon: Pokemon) => {
     setSelectedPokemon(pokemon);
     setShowModal(true);
-    //document.body.classList.add('is-modal-toggle');
   };
 
   // モーダルを閉じる
   const pokemonModalClose = () => {
     setSelectedPokemon(null);
     setShowModal(false);
-    //document.body.classList.remove('is-modal-toggle');
   }
 
   /**
@@ -53,7 +56,7 @@ const PokemonList: NextPage = () => {
   // ポケモンのリストを取得するための非同期関数を定義
   useEffect(() => {
     const fetchPokemon = async () => { // asyncを書いて非同期（async）関数であることを宣言
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=25"); // PokeAPI取得
+      const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=150"); // PokeAPI取得
       const data = await response.json();
 
       const results = await Promise.all(
@@ -97,6 +100,7 @@ const PokemonList: NextPage = () => {
 
       // ポケモンのリストを更新
       setPokemonList(results);
+      setLoading(false);
 
       // ポケモンのリストを更新
       //setPokemonList(results02);
@@ -106,6 +110,10 @@ const PokemonList: NextPage = () => {
     // コンポーネントがマウントされた時だけfetchPokemon関数を実行
     fetchPokemon();
   }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -119,7 +127,7 @@ const PokemonList: NextPage = () => {
         <SideNav />
         <ul className="flex flex-wrap justify-between md:justify-start w-4/5 sm:w-10/12 mx-auto md:ml-auto md:mr-0 mt-8 md:mt-0">
           {pokemonList.map((pokemon) => (
-          <li key={pokemon.id} className="mb-12 md:mb-24 px-4 md:px-12 sm:w-5/12 md:w-1/3 lg:w-1/4 cursor-pointer" onClick={() => pokemonElementClick(pokemon)}>
+          <li key={pokemon.id} className="mb-12 md:mb-24 px-4 md:px-12 sm:w-5/12 md:w-1/3 lg:w-1/4 cursor-pointer duration-300 hover:opacity-70" onClick={() => pokemonElementClick(pokemon)}>
             <img src={pokemon.image} alt={`${pokemon.name} Image`} />
             {/* <Image src={pokemon.image} alt={`${pokemon.name} Image`} width={100} height={100} /> */}
             <p className="mb-1">Order No. {pokemon.id}</p>
