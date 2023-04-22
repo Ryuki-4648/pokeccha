@@ -118,8 +118,9 @@ const PokemonList: NextPage = () => {
   return (
     <>
       <Head>
-        <title>pokeccha</title>
-        <meta property="og:title" content="PokeAPIでポケモンリストをつくろう" />
+        <title>pokeccha | お気に入りのポケモンを見つけよう</title>
+        <meta name="description" content="pokeccha | React.js, TypeScript, Next.js, PokeAPIでポケモンリスト作成" />
+        <meta property="og:title" content="pokeccha | お気に入りのポケモンを見つけよう" />
       </Head>
       <Header />
       
