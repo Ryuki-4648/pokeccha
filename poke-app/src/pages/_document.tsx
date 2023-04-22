@@ -10,7 +10,11 @@ import { Html, Head, Main, NextScript } from 'next/document'
 export default function Document() {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+        <title>pokeccha | お気に入りのポケモンを見つけよう</title>
+        <meta name="description" content="pokeccha | React.js, TypeScript, Next.js, PokeAPIでポケモンリスト作成" />
+        <meta property="og:title" content="pokeccha | お気に入りのポケモンを見つけよう" />
+      </Head>
       <body className="bg-main-color01">
         <Main />
         <NextScript />
